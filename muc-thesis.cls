@@ -152,6 +152,13 @@
 \fancyfoot[C]{\zihao{-5}\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 
+% 摘要页样式：无页眉，页脚显示罗马数字页码
+\fancypagestyle{abstract}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\zihao{-5}\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
 % 确保 plain 样式（章节首页）也有一致的页眉
 \fancypagestyle{plain}{
   \fancyhf{}
@@ -237,7 +244,21 @@
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 
 \newcommand{\makemuctableofcontents}{%
+  \cleardoublepage
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+  }%
+  \pagestyle{empty}%
   \tableofcontents
+  \addtocontents{toc}{\protect\thispagestyle{empty}}%
+  % 恢复 plain 样式供正文使用
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyhead[R]{\zihao{-5}\songti 中央民族大学本科毕业\muc@paperortype}%
+    \fancyfoot[C]{\zihao{-5}\thepage}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+  }%
 }
 
 \newcommand{\makecoverpage}{%
@@ -355,7 +376,8 @@
 
 \newenvironment{cnabstract}{
   \cleardoublepage
-  \pagestyle{empty}
+  \pagenumbering{Roman}%
+  \pagestyle{abstract}%
   \begin{center}
     {\heiti\zihao{3} \@title}
   \end{center}
@@ -375,7 +397,7 @@
 
 \newenvironment{enabstract}{
   \cleardoublepage
-  \pagestyle{empty}
+  \pagestyle{abstract}%
   \begin{center}
     {\bfseries\rmfamily\zihao{3} \muc@entitle}
   \end{center}
@@ -410,7 +432,7 @@
 
 \newcommand{\makeaipage}{%
   \cleardoublepage
-  \thispagestyle{fancy}
+  \thispagestyle{empty}
   \begin{center}
     \xiaobiaosong\zihao{2} 关于使用 AI 工具情况的说明
   \end{center}

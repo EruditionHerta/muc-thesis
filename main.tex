@@ -6,6 +6,8 @@
 \title{中文题目（毕业论文题目）} % 设置中文标题（封面与摘要页同步更新）
 \entitle{English Title} % 设置英文标题（英文摘要页同步更新）
 \paperortype{设计} % 将{}里面的内容改成论文或设计。信计、统计专业改成论文，光电、纳米专业改成设计
+\keywordsCN{中央民族大学；本科毕业论文；LaTeX 模板；XeLaTeX} % 关键词，中文分号分隔
+\keywordsEN{Minzu University of China; undergraduate thesis; LaTeX template; XeLaTeX} % 关键词，英文分号分隔
 
 % 可以手动删除各个内容中的\remark{}红色提醒信息，也可取消注释该命令，自动隐藏模板中标红的的备注信息
 % ↓
@@ -35,8 +37,6 @@
 
 \coverlogo{image1.png}
 \covercategory{本科毕业论文（设计）}
-\keywordsCN{中央民族大学；本科毕业论文；LaTeX 模板；XeLaTeX}
-\keywordsEN{Minzu University of China; undergraduate thesis; LaTeX template; XeLaTeX}
 % 
 % 以上为选填项，可以不管
 
@@ -44,13 +44,14 @@
 
 \begin{document}
 
+% 这四个命令分别生成封面、任务书、承诺书、授权书页，主要用来演示和保持完整性。插入签字请使用word模板
 \makecoverpage
 \maketaskbook
 \makeintegritypage
 \makelicensepage
 
 % 将填写好相关内容并签好字的封面、任务书、承诺书、授权书的 PDF，存入frontmatter文件夹下，注释掉以上四行\make...命令，并直接插入相应 PDF 页
-% 取消下方注释并替换文件名
+% 取消下方\insertfrontpdf{}命令的注释并替换文件名
 % 注意插入顺序
 % 1.封面
 % \insertfrontpdf{frontmatter/task-book-signed.pdf}
@@ -66,7 +67,7 @@
 
 \include{contents/abstract}
 
-\tableofcontents
+\makemuctableofcontents
 
 \mainmatter
 \pagestyle{fancy} % 显式声明开启页眉页脚
@@ -80,8 +81,14 @@
 \nocite{*} % 强制显示所有参考文献条目，无论正文是否引用
 \printbibliography[heading=bibintoc,title={参考文献}]
 
-\makeaipage
-
 \include{contents/acknowledgements}
+
+% AI 使用说明页，同样涉及到签字问题，提交PDF时整行注释以隐藏
+\makeaipage
+% 然后插入签字后的AI使用说明PDF，自行修改文件名
+% \insertfrontpdf{frontmatter/ai-usage-signed.pdf}
+
+% 以下为模板贡献者名单页，提交PDF时整行注释以隐藏
+\include{contents/contributors}
 
 \end{document}
