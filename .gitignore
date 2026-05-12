@@ -16,6 +16,12 @@
 .DS_Store
 Thumbs.db
 
+# Superpowers
+docs/superpowers/
+
+# Word template (binary, skip tracking)
+docs/*.doc
+
 # Other
 main_copy.*
 *.latex
